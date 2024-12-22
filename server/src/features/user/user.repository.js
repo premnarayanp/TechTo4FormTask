@@ -1,4 +1,5 @@
 import User from './user.schema.js';
+import UserTypes from '../userTypes/userTypes.schema.js';
 
 //------------register the User--------------
 export const createUser = async (body) => {
@@ -63,13 +64,14 @@ export const updateUser = async (userId, body) => {
 export const deleteUser = async (userId) => {
     try {
         const user = await User.findByIdAndRemove({ _id: userId });
+        // console.log("deleted user2---------------------", user);
         if (user) {
             //remove user from UserTypes array
             let userTypes = await UserTypes.findByIdAndUpdate(user.userTypes, {
                 $pull: { users: userId },
             });
 
-            return res.send({ success: true, message: "User Deleted Successfully" });
+            return { success: true, message: "User Deleted Successfully" };
         } else {
             return new Error("User Id not match");
         }

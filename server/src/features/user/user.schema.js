@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
         type: String,
     },
 
+    type: {
+        type: String,
+    },
     userTypes: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'UserTypes'

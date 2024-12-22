@@ -3,7 +3,7 @@ import { createUserType, getAllUserType, updateUserType, deleteUserType as remov
 //Create/Add the UserTypes
 const create = async (req, res) => {
     const body = req.body;
-    console.log(body);
+    // console.log(body);
 
     if (!body.type) {
         return res.json({ success: false, msg: "please fill all fields..", data: null });

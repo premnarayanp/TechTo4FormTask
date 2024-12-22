@@ -51,13 +51,14 @@ export const updateUserType = async (userId, body) => {
 export const deleteUserType = async (typeId) => {
     try {
         const userType = await UserTypes.findByIdAndRemove({ _id: typeId });
+        //console.log("userType=", userType);
         if (userType) {
             //remove  related user from User 
-            await User.deleteMany({ userType: typeId });
-
-            return res.send({ success: true, msg: "UserTypes and Related Users Deleted Successfully" });
+            await User.deleteMany({ userTypes: typeId });
+            //console.log("-----------Deleting-----------------");
+            return { success: true, msg: "UserTypes and Related Users Deleted Successfully" };
         } else {
-            return res.send({ success: false, msg: "UserTypes  not Exist or Wrong Id" });
+            return { success: false, msg: "UserTypes  not Exist or Wrong Id" };
         }
 
     } catch (error) {
